@@ -33,10 +33,15 @@ module MapReduce
         @data_types_order << entry["name"]
       end
 
-      @data_types_order.each do |attr|
-        where_condition.gsub! attr.to_s, "attributes[@data_types_order[:#{attr}]]"
+      @data_types_order.each_with_index do |attr, index|
+        column_data_type = @data_members[index]["type"]
+        conversion = column_data_type.casecmp?("int") ? ".to_i" : ""
+        +(column_data_type.casecmp?("float") ? ".to_f" : "")
+
+        where_condition.gsub! /#{attr.to_s}/i, "attributes[#{index}]" + conversion;
       end
 
+      puts where_condition
       @where_condition = where_condition
     end
 
@@ -51,6 +56,7 @@ module MapReduce
 
 
         attributes = line.split(@field_terminator).each(&:strip!)
+
 
         result_file.write line if eval(@where_condition)
 

@@ -1,9 +1,12 @@
 require_relative 'map_reduce'
 require 'json'
+require 'time'
 
+
+start =  Time.now
 
 MapReduce::Mapper.new("EMPLOYEES",
                       "employees.csv",
-                      "salary > 1000").map
+                      "EMPLOYEE_NAME == \"Hamza\"").map
 
-
+puts Time.now - start
