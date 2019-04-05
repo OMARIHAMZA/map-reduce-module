@@ -1,5 +1,9 @@
 require_relative 'map_reduce'
+require 'json'
 
-MapReduce::Mapper.new("lemme.txt", nil, nil, nil).map
+
+MapReduce::Mapper.new("EMPLOYEES",
+                      "employees.csv",
+                      "salary > 1000").map
 
 
