@@ -1,10 +1,14 @@
+gem 'parallel'
+require 'parallel'
+require 'stringio'
+
 module MapReduce
 
   DATA_TYPES_FILE_PATH = "C:\\Users\\ASUS\\Documents\\GitHub\\pl-sql-compiler\\output.json"
   MAPPER_SUFFIX = "mapper_result_"
+  SHUFFLER_SUFFIX = "shuffler_result_"
 
   class Mapper
-
 
     def initialize(table_name, file_name, where_condition = "true")
 
@@ -41,8 +45,8 @@ module MapReduce
         where_condition.gsub! /#{attr.to_s}/i, "attributes[#{index}]" + conversion;
       end
 
-      puts where_condition
       @where_condition = where_condition
+
     end
 
     private :get_resources
@@ -55,18 +59,98 @@ module MapReduce
       File.foreach(@file_name) do |line|
 
 
-        attributes = line.split(@field_terminator).each(&:strip!)
+        attributes = line.split(@field_terminator)
 
 
-        result_file.write line if eval(@where_condition)
+        result_file.write line.gsub(@field_terminator, ',') if eval(@where_condition)
 
       end
 
       result_file.close
 
+      @data_types_order
+
+
+    end
+  end
+
+  class Shuffler
+
+
+    def initialize(file_name, key, data_types_order)
+
+      @file_name = file_name
+      @key = key
+      @data_types_order = data_types_order
+
     end
 
-    class Shuffler
+    def shuffle
+
+      value_index = @data_types_order.index(@key.upcase)
+
+      shuffling_threads = []
+
+      File.foreach(@file_name) do |line|
+
+        shuffling_threads << Thread.new {
+
+          attributes = line.split(",")
+
+          line_key = attributes[value_index]
+
+          current_file_name = SHUFFLER_SUFFIX + line_key
+
+          f = File.new(current_file_name, "a")
+
+          f.write(line)
+
+          f.close
+        }
+
+      end
+
+      ThreadsWait.all_waits(shuffling_threads)
+
+    end
+
+    def memory_shuffle
+
+      value_index = @data_types_order.index(@key.upcase)
+
+      file_content = File.read(@file_name)
+
+      files = Hash.new("")
+
+      file_content.each_line do |line|
+
+        attributes = line.split(",")
+
+        line_key = attributes[value_index]
+
+        current_file_name = SHUFFLER_SUFFIX + line_key
+
+        files[current_file_name] = files[current_file_name] + line
+
+      end
+
+      file_threads = []
+
+      files.each_pair do |key, value|
+
+        file_threads << Thread.new {
+
+          current_file = File.open(key, "w")
+
+          current_file.write value
+
+          current_file.close
+
+        }
+
+      end
+
+      ThreadsWait.all_waits(file_threads)
 
     end
 
@@ -77,15 +161,3 @@ module MapReduce
   end
 
 end
-
-=begin
-        [column, condition, value]
-         age, <, 20
-
-        if condition == "<"
-          column.value < value
-        end
-
-
-=end
-
