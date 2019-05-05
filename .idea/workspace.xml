@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="157c9eaa-085e-4de0-948a-000da96a7e1b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/employees1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/MapReduce.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MapReduce.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main.rb" beforeDir="false" afterPath="$PROJECT_DIR$/Main.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/map_reduce.rb" beforeDir="false" afterPath="$PROJECT_DIR$/map_reduce.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapper_result_employees.csv" beforeDir="false" afterPath="$PROJECT_DIR$/mapper_result_employees.csv" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,7 +15,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/MapReduce@Main.rcov" NAME="Main Coverage Results" MODIFIED="1554456849641" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="MapReduce" />
-    <SUITE FILE_PATH="coverage/map_reduce_module@Main.rcov" NAME="Main Coverage Results" MODIFIED="1555664908308" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="MapReduce" />
+    <SUITE FILE_PATH="coverage/map_reduce_module@Main.rcov" NAME="Main Coverage Results" MODIFIED="1555698385533" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="MapReduce" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -37,11 +36,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/map_reduce.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="133" lean-forward="true" selection-start-line="133" selection-end-line="133" />
-              <folding>
-                <element signature="e#1996#2306#0" />
-              </folding>
+            <state relative-caret-position="-130">
+              <caret line="143" lean-forward="true" selection-start-line="143" selection-end-line="143" />
             </state>
           </provider>
         </entry>
@@ -49,8 +45,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Main.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="26" column="24" selection-start-line="26" selection-start-column="24" selection-end-line="27" />
+            <state relative-caret-position="306">
+              <caret line="27" selection-start-line="27" selection-end-line="27" />
             </state>
           </provider>
         </entry>
@@ -67,6 +63,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>&quot;</find>
+      <find>salary</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -85,8 +82,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="width" value="977" />
+    <option name="x" value="-10" />
+    <option name="width" value="979" />
     <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -97,6 +94,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -108,7 +106,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -177,6 +174,8 @@
       <workItem from="1555267014877" duration="1924000" />
       <workItem from="1555268997385" duration="1510000" />
       <workItem from="1555659657525" duration="5145000" />
+      <workItem from="1555679959355" duration="3869000" />
+      <workItem from="1555697832528" duration="555000" />
     </task>
     <task id="LOCAL-00001" summary="Read Field Terminator and Data Members from the Data Types File">
       <created>1554475471431</created>
@@ -196,18 +195,18 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29354000" />
+    <option name="totallyTimeSpent" value="33778000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25838926" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2657718" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2932961" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32960895" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.2932961" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -249,131 +248,65 @@
           <line>89</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/Main.rb</url>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/sex.txt" />
-    <entry file="file://$PROJECT_DIR$/mapper_result_lemme.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="27" lean-forward="true" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/rubystubs26/string.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="26639">
-          <caret line="1567" column="8" selection-start-line="1567" selection-start-column="8" selection-end-line="1567" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/rubystubs26/time.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="114" column="12" selection-start-line="114" selection-start-column="12" selection-end-line="114" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_5000" />
-    <entry file="file://$PROJECT_DIR$/shuffler_result_500">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_salary" />
     <entry file="file://$PROJECT_DIR$/shuffler_result_55000" />
-    <entry file="file://$PROJECT_DIR$/shuffler_result_1">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-51" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_2">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_82373">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_223236">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_82808">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/shuffler_result_1" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_2" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_82373" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_223236" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_82808" />
     <entry file="file://$PROJECT_DIR$/departments.csv">
+      <provider selected="true" editor-type-id="csv-text-editor" />
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
-      <provider selected="true" editor-type-id="csv-text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_248397">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_243778">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_240779">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_239040">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_249063">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_74626">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_3000">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_60473">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_60787">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_249045">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_247285">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/shuffler_result_248397" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_243778" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_240779" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_239040" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_249063" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_74626" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_3000" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_60473" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_60787" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_249045" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_247285" />
     <entry file="file://$PROJECT_DIR$/mapper_result_employees1.csv">
+      <provider selected="true" editor-type-id="csv-text-editor" />
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
-      <provider selected="true" editor-type-id="csv-text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/mapper_result_employees2.csv">
+      <provider selected="true" editor-type-id="csv-text-editor" />
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
-      <provider selected="true" editor-type-id="csv-text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/mapper_result_employees.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="17">
           <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/employees2.csv">
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
-      <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/employees.csv">
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state relative-caret-position="184">
+          <caret line="986" column="43" selection-start-line="986" selection-start-column="43" selection-end-line="986" selection-end-column="43" />
+        </state>
+      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="10" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
@@ -387,75 +320,91 @@
           <column index="3" width="100" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shuffler_result_66308" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_65941" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_65651" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_60519" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_60052" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_67116" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_249508" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_246304" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_63713" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_1000" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_2000" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_Anas">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shuffler_result_employee_name">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/employees2.csv">
       <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="184">
-          <caret line="986" column="43" selection-start-line="986" selection-start-column="43" selection-end-line="986" selection-end-column="43" />
+        <state relative-caret-position="51">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/employees1.csv">
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/employees1.csv">
       <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="-85">
+        <state relative-caret-position="119">
           <caret line="7" column="69" selection-end-line="999" selection-end-column="40" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_66308">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_65941">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_65651">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_60519">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_60052">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1185" />
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_67116">
+    <entry file="file://$PROJECT_DIR$/shuffler_result_61441">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_249508">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1219" />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/shuffler_result_68203">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_246304">
+    <entry file="file://$PROJECT_DIR$/shuffler_result_76664">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shuffler_result_92140">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shuffler_result_95552">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shuffler_result_119796">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shuffler_result_127022">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shuffler_result_134858">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shuffler_result_142761">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shuffler_result_146633">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shuffler_result_110256">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shuffler_result_104553">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Main.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="26" column="24" selection-start-line="26" selection-start-column="24" selection-end-line="27" />
+        <state relative-caret-position="306">
+          <caret line="27" selection-start-line="27" selection-end-line="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_63713">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-148" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_1000">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_2000">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/map_reduce.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="133" lean-forward="true" selection-start-line="133" selection-end-line="133" />
-          <folding>
-            <element signature="e#1996#2306#0" />
-          </folding>
+        <state relative-caret-position="-130">
+          <caret line="143" lean-forward="true" selection-start-line="143" selection-end-line="143" />
         </state>
       </provider>
     </entry>

@@ -42,10 +42,11 @@ module MapReduce
         conversion = column_data_type.casecmp?("int") ? ".to_i" : ""
         +(column_data_type.casecmp?("float") ? ".to_f" : "")
 
-        where_condition.gsub! /#{attr.to_s}/i, "attributes[#{index}]" + conversion;
+        where_condition.gsub! /#{attr.to_s}/i, "attributes[#{index}]" + conversion
       end
 
       @where_condition = where_condition
+
 
     end
 
@@ -68,8 +69,7 @@ module MapReduce
 
       result_file.close
 
-      @data_types_order
-
+      [@data_types_order, @data_members]
 
     end
   end
@@ -116,6 +116,8 @@ module MapReduce
 
     def memory_shuffle
 
+      puts @key
+
       value_index = @data_types_order.index(@key.upcase)
 
       file_content = File.read(@file_name)
@@ -154,10 +156,90 @@ module MapReduce
 
     end
 
-    class Reducer
+  end
+
+
+  class Reducer
+
+    def initialize(file_name, key, data_types_order, data_members)
+
+      @file_name = file_name
+      @key = key
+      @data_types_order = data_types_order
+      @data_members = data_members
 
     end
 
+    def reduce
+
+
+      summarize_result = {
+          :sum => nil,
+          :max => nil,
+          :min => nil,
+          :mean => nil,
+          :q1 => nil,
+          :q3 => nil,
+          :mode => nil,
+          :count => nil
+      }
+
+      value_index = @data_types_order.index(@key.upcase)
+      value_data_type = nil
+
+      @data_members.each_with_index do |value, index|
+
+        if index == value_index
+
+          value_data_type = value["type"]
+
+        end
+
+      end
+
+
+      values = []
+
+      File.foreach(@file_name) do |line|
+
+        attributes = line.split(",")
+
+        line_key = attributes[value_index]
+
+        values << case value_data_type
+                  when "STRING";
+                    line_key
+                  when "INT";
+                    line_key.to_i
+                  when "FLOAT";
+                    line_key.to_f
+                  end
+
+      end
+
+
+      summarize_result[:count] = values.count
+
+      if value_data_type != "STRING"
+
+        values.sort!
+        puts "Values: " + values.to_s
+        summarize_result[:sum] = values.sum
+        summarize_result[:max] = values.last
+        summarize_result[:min] = values.first
+        summarize_result[:mean] = summarize_result[:sum] / values.count
+        summarize_result[:mode] = values[(values.size / 2).floor]
+        summarize_result[:q1] = values[(values.size / 4).floor]
+        summarize_result[:q3] = values[((values.count + values.size / 2) / 2).floor]
+
+      end
+
+      summarize_result
+
+    end
+
+
   end
+
 
 end
