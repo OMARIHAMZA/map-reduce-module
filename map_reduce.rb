@@ -17,6 +17,12 @@ module MapReduce
 
     end
 
+    def map(records, grouping_columns, aggregation_columns)
+
+      grouping_columns.empty? ? mapper_without_shuffling(records, aggregation_columns) : mapper_with_shuffling(records, grouping_columns, aggregation_columns)
+
+    end
+
     def mapper_without_shuffling(records, aggregation_columns)
 
       result_file = File.open(MapReduce::MAPPER_RESULT_FILE, "w")
@@ -100,10 +106,20 @@ module MapReduce
 
   class Reducer
 
-    def initialize(input_file, aggregation_columns)
+    def initialize(input_file, grouping_columns, aggregation_columns)
 
       @input_file = input_file
+      @grouping_columns = grouping_columns
       @aggregation_columns = aggregation_columns
+
+      puts grouping_columns.to_s
+      puts aggregation_columns.to_s
+
+    end
+
+    def reduce
+
+      @grouping_columns.empty? ? reduce_without_shuffle : reduce_with_shuffle
 
     end
 
@@ -188,68 +204,6 @@ module MapReduce
       output_file.close
 
       MapReduce::REDUCER_RESULT_FILE
-
-    end
-
-    def reduce
-
-=begin
-
-      summarize_result = {
-
-      }
-
-      value_index = @data_types_order.index(@key.upcase)
-      value_data_type = nil
-
-      @data_members.each_with_index do |value, index|
-
-        if index == value_index
-
-          value_data_type = value["type"]
-
-        end
-
-      end
-
-
-      values = []
-
-      File.foreach(@file_name) do |line|
-
-        attributes = line.split(",")
-
-        line_key = attributes[value_index]
-
-        values << case value_data_type
-                  when "STRING";
-                    line_key
-                  when "INT";
-                    line_key.to_i
-                  when "FLOAT";
-                    line_key.to_f
-                  end
-
-      end
-
-
-      summarize_result[:count] = values.count
-
-      if value_data_type != "STRING"
-
-        values.sort!
-        summarize_result[:sum] = values.sum
-        summarize_result[:max] = values.last
-        summarize_result[:min] = values.first
-        summarize_result[:avg] = summarize_result[:sum] / values.count
-        summarize_result[:mode] = values[(values.size / 2).floor]
-        summarize_result[:q1] = values[(values.size / 4).floor]
-        summarize_result[:q3] = values[((values.count + values.size / 2) / 2).floor]
-
-      end
-
-      summarize_result
-=end
 
     end
 
