@@ -1,122 +1,53 @@
 gem 'parallel'
 require 'parallel'
 require 'stringio'
+require_relative 'enumerable'
 
 module MapReduce
 
   DATA_TYPES_FILE_PATH = "C:\\Users\\ASUS\\Documents\\GitHub\\pl-sql-compiler\\output.json"
-  MAPPER_SUFFIX = "mapper_result_"
+  MAPPER_RESULT_FILE = "mapper_result.txt"
+  REDUCER_RESULT_FILE = "reducer_result.txt"
   SHUFFLER_SUFFIX = "shuffler_result_"
 
   class Mapper
 
-    def initialize(table_name, file_name, where_condition = "true")
-
-      @table_name = table_name
-      @file_name = file_name
-      @where_condition = ""
-      get_resources(where_condition)
+    def initialize
 
     end
 
-    def get_resources (where_condition)
-      @json_array = JSON.parse File.read(MapReduce::DATA_TYPES_FILE_PATH)
-      @json_array.map do |entry|
+    def map(records, aggregation_columns)
 
-        if entry["name"].casecmp?(@table_name)
-          @field_terminator = entry["field_terminator"]
-          @data_members = entry["members"]
-          break
-        end
+      result_file = File.open(MapReduce::MAPPER_RESULT_FILE, "w")
 
-      end
+      aggregation_columns.each do |entry|
 
-      @data_types_order = []
-
-      @data_members.each do |entry|
-        @data_types_order << entry["name"]
-      end
-
-      @data_types_order.each_with_index do |attr, index|
-        column_data_type = @data_members[index]["type"]
-        conversion = column_data_type.casecmp?("int") ? ".to_i" : ""
-        +(column_data_type.casecmp?("float") ? ".to_f" : "")
-
-        where_condition.gsub! /#{attr.to_s}/i, "attributes[#{index}]" + conversion
-      end
-
-      @where_condition = where_condition
-
-
-    end
-
-    private :get_resources
-
-    def map
-
-      result_file = File.open(MapReduce::MAPPER_SUFFIX + @file_name, "w")
-
-
-      File.foreach(@file_name) do |line|
-
-
-        attributes = line.split(@field_terminator)
-
-
-        result_file.write line.gsub(@field_terminator, ',') if eval(@where_condition)
+        result_file.puts records.map {|record| record.split(",")[entry[:index]]}.join(",")
 
       end
 
       result_file.close
 
-      [@data_types_order, @data_members]
+      MapReduce::MAPPER_RESULT_FILE
 
     end
+
   end
 
   class Shuffler
 
 
-    def initialize(file_name, key, data_types_order)
+    def initialize
 
-      @file_name = file_name
-      @key = key
-      @data_types_order = data_types_order
 
     end
 
     def shuffle
 
-      value_index = @data_types_order.index(@key.upcase)
-
-      shuffling_threads = []
-
-      File.foreach(@file_name) do |line|
-
-        shuffling_threads << Thread.new {
-
-          attributes = line.split(",")
-
-          line_key = attributes[value_index]
-
-          current_file_name = SHUFFLER_SUFFIX + line_key
-
-          f = File.new(current_file_name, "a")
-
-          f.write(line)
-
-          f.close
-        }
-
-      end
-
-      ThreadsWait.all_waits(shuffling_threads)
 
     end
 
     def memory_shuffle
-
-      puts @key
 
       value_index = @data_types_order.index(@key.upcase)
 
@@ -142,7 +73,7 @@ module MapReduce
 
         file_threads << Thread.new {
 
-          current_file = File.open(key, "w")
+          current_file = File.open(key.chomp, "w")
 
           current_file.write value
 
@@ -161,27 +92,60 @@ module MapReduce
 
   class Reducer
 
-    def initialize(file_name, key, data_types_order, data_members)
+    def initialize(input_file, aggregation_columns)
 
-      @file_name = file_name
-      @key = key
-      @data_types_order = data_types_order
-      @data_members = data_members
+      @input_file = input_file
+      @aggregation_columns = aggregation_columns
+
+    end
+
+    def reduce_without_shuffle
+
+      line_number = 0
+
+      result_file = File.open(MapReduce::REDUCER_RESULT_FILE, "w")
+
+      File.foreach(@input_file) do |line|
+
+
+
+        result_file.puts case @aggregation_columns[line_number][:function]
+
+        when :SUM
+          line.split(",").map(&:to_i).sum
+
+        when :MAX
+          line.split(",").map(&:to_i).max
+
+        when :MIN
+          line.split(",").map(&:to_i).min
+
+        when :AVG
+          line.split(",").map(&:to_i).avg
+
+        when :STDEV
+          line.split(",").map(&:to_i).stdev
+
+        when :VARIANCE
+          line.split(",").map(&:to_i).variance
+
+        end
+
+
+        line_number += 1
+
+      end
+
+      result_file.close
 
     end
 
     def reduce
 
+=begin
 
       summarize_result = {
-          :sum => nil,
-          :max => nil,
-          :min => nil,
-          :mean => nil,
-          :q1 => nil,
-          :q3 => nil,
-          :mode => nil,
-          :count => nil
+
       }
 
       value_index = @data_types_order.index(@key.upcase)
@@ -223,11 +187,10 @@ module MapReduce
       if value_data_type != "STRING"
 
         values.sort!
-        puts "Values: " + values.to_s
         summarize_result[:sum] = values.sum
         summarize_result[:max] = values.last
         summarize_result[:min] = values.first
-        summarize_result[:mean] = summarize_result[:sum] / values.count
+        summarize_result[:avg] = summarize_result[:sum] / values.count
         summarize_result[:mode] = values[(values.size / 2).floor]
         summarize_result[:q1] = values[(values.size / 4).floor]
         summarize_result[:q3] = values[((values.count + values.size / 2) / 2).floor]
@@ -235,6 +198,7 @@ module MapReduce
       end
 
       summarize_result
+=end
 
     end
 

@@ -1,6 +1,7 @@
 *.gem
 *.rbc
 *.csv
+.idea/
 /.config
 /coverage/
 /InstalledFiles

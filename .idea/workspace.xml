@@ -1,11 +1,202 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="157c9eaa-085e-4de0-948a-000da96a7e1b" name="Default Changelist" comment="">
+    <list default="true" id="157c9eaa-085e-4de0-948a-000da96a7e1b" name="Default Changelist" comment="Mapper Implementation">
+      <change afterPath="$PROJECT_DIR$/enumerable.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/execution_plan_utilities.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main.rb" beforeDir="false" afterPath="$PROJECT_DIR$/Main.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/map_reduce.rb" beforeDir="false" afterPath="$PROJECT_DIR$/map_reduce.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapper_result_employees.csv" beforeDir="false" afterPath="$PROJECT_DIR$/mapper_result_employees.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapper_result_," beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapper_result_departments.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapper_result_employees.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapper_result_employees1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapper_result_employees2.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mapper_result_lemme.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Admiral" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Albatross" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Alligator" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Anaconda (unidentified)" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Anteater" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Antelope" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Armadillo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Avocet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Baboon" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Badger" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Bandicoot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Barbet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Bear" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Beaver" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Bee-eater" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Bettong" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Bird" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Bison" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Bleu" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Boa" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Boar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Booby" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Boubou" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Buffalo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Bulbul" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Bushbaby" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Bustard" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Butterfly" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Caiman" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Camel" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Capuchin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Caracara" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Cat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Catfish" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Cliffchat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Coatimundi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Cobra" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Cockatoo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Colobus" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Corella" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Cormorant" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Cow" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Crab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Crane" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Darter" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Deer" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Dik" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Dog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Dolphin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Dove" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Dragon" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Duck" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Eagle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Egret" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Eland" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Elephant" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Falcon" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Flamingo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Flycatcher" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Fox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Francolin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Gazelle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Gazer" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Gecko" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Genet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Glider" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Gnu" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Godwit" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Goldeneye" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Gonolek" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Goose" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Gorilla" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Grenadier" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Gull" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Hawk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Hen" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Heron" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Hoopoe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Hornbill" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Hyena" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Ibis" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Iguana" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Insect" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Jackal" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Jackrabbit" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Jaeger" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Kangaroo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Kingfisher" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Kite" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Kookaburra" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Kudu" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Lapwing" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Lark" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Legaan" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Lemming" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Lemur" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Lion" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Lizard" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Lory" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Macaw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Magpie" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Moccasin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Mockingbird" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Mongoose" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Monitor" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Monkey" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Mouse" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Mynah" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Otter" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Owl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Ox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Oystercatcher" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Pademelon" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Parakeet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Partridge" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Peacock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Peccary" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Pelican" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Penguin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Phascogale" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Pheasant" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Pintail" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Plover" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Porcupine" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Possum" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Puffin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Puma" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Python" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Quail" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Raccoon" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Racer" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Rattlesnake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Rhea" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Rhinoceros" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Roadrunner" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Robin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Roller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Sandpiper" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Screamer" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Seal" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Sheep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Shelduck" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Shrike" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Skink" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Skua" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Skunk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Sloth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Snake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Spider" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Spoonbill" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Spurfowl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Squirrel" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Starfish" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Starling" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Stilt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Stork" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Sunbird" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Sungazer" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Swan" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Tapir" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Teal" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Tenrec" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Tern" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Tortoise" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Toucan" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Trumpeter" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Turkey" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Viper" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Vulture" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Wallaby" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Wambenger" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Wapiti" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Waterbuck" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Waxbill" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Weaver" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Whale" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_White-eye" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Wolf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Wombat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Woodpecker" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Zebra" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shuffler_result_Zorro" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,7 +206,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/MapReduce@Main.rcov" NAME="Main Coverage Results" MODIFIED="1554456849641" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="MapReduce" />
-    <SUITE FILE_PATH="coverage/map_reduce_module@Main.rcov" NAME="Main Coverage Results" MODIFIED="1555698385533" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="MapReduce" />
+    <SUITE FILE_PATH="coverage/map_reduce_module@Main.rcov" NAME="Main Coverage Results" MODIFIED="1557933204691" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="MapReduce" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -33,20 +224,56 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/map_reduce.rb">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Main.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-130">
-              <caret line="143" lean-forward="true" selection-start-line="143" selection-end-line="143" />
+            <state relative-caret-position="178">
+              <caret line="40" selection-start-line="40" selection-end-line="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" column="18" lean-forward="true" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Main.rb">
+        <entry file="file://$PROJECT_DIR$/mapper_result.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="27" selection-start-line="27" selection-end-line="27" />
+            <state relative-caret-position="51">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/enumerable.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="16" column="3" lean-forward="true" selection-start-line="16" selection-start-column="3" selection-end-line="16" selection-end-column="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/map_reduce.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="108" lean-forward="true" selection-start-line="108" selection-end-line="108" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/reducer_result.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
@@ -56,6 +283,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Ruby Class Template" />
         <option value="Ruby Module Template" />
       </list>
     </option>
@@ -64,6 +292,15 @@
     <findStrings>
       <find>&quot;</find>
       <find>salary</find>
+      <find>puts ke</find>
+      <find>thread</find>
+      <find>JSON</find>
+      <find>puts</find>
+      <find>1</find>
+      <find>1,1</find>
+      <find>Qana</find>
+      <find>records &lt;&lt;</find>
+      <find>&lt;&lt;</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -76,14 +313,18 @@
         <option value="$PROJECT_DIR$/employees1.csv" />
         <option value="$PROJECT_DIR$/mapper_result_employees.csv" />
         <option value="$PROJECT_DIR$/employees.csv" />
-        <option value="$PROJECT_DIR$/Main.rb" />
+        <option value="$PROJECT_DIR$/../pl-sql-compiler/src/res/loop.rb" />
+        <option value="$PROJECT_DIR$/execution_plan_utilities.rb" />
+        <option value="$PROJECT_DIR$/enumerable.rb" />
         <option value="$PROJECT_DIR$/map_reduce.rb" />
+        <option value="$PROJECT_DIR$/Main.rb" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-10" />
-    <option name="width" value="979" />
+    <option name="width" value="980" />
     <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -112,7 +353,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -176,6 +417,22 @@
       <workItem from="1555659657525" duration="5145000" />
       <workItem from="1555679959355" duration="3869000" />
       <workItem from="1555697832528" duration="555000" />
+      <workItem from="1557136043454" duration="1319000" />
+      <workItem from="1557396968452" duration="1205000" />
+      <workItem from="1557400044196" duration="3520000" />
+      <workItem from="1557423968381" duration="5899000" />
+      <workItem from="1557491024104" duration="2628000" />
+      <workItem from="1557510782641" duration="599000" />
+      <workItem from="1557560853973" duration="12364000" />
+      <workItem from="1557597632532" duration="3265000" />
+      <workItem from="1557653945593" duration="349000" />
+      <workItem from="1557674314697" duration="6133000" />
+      <workItem from="1557735844037" duration="4708000" />
+      <workItem from="1557751019768" duration="5326000" />
+      <workItem from="1557828665445" duration="5193000" />
+      <workItem from="1557840907845" duration="14450000" />
+      <workItem from="1557907412204" duration="5678000" />
+      <workItem from="1557913731330" duration="8744000" />
     </task>
     <task id="LOCAL-00001" summary="Read Field Terminator and Data Members from the Data Types File">
       <created>1554475471431</created>
@@ -195,18 +452,18 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33778000" />
+    <option name="totallyTimeSpent" value="115158000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2657718" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49860334" visible="true" weight="0.27986577" />
+      <window_info id="Structure" order="1" sideWeight="0.50139666" side_tool="true" weight="0.27986577" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32960895" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.2932961" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.4217877" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -214,8 +471,8 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.47486034" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4986577" weight="0.47486034" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5013423" side_tool="true" weight="0.47486034" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -230,83 +487,76 @@
     <MESSAGE value="Mapper Implementation" />
     <option name="LAST_COMMIT_MESSAGE" value="Mapper Implementation" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/map_reduce.rb</url>
-          <line>44</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/Main.rb</url>
-          <line>8</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/map_reduce.rb</url>
-          <line>89</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/Main.rb</url>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/shuffler_result_55000" />
-    <entry file="file://$PROJECT_DIR$/shuffler_result_1" />
-    <entry file="file://$PROJECT_DIR$/shuffler_result_2" />
-    <entry file="file://$PROJECT_DIR$/shuffler_result_82373" />
-    <entry file="file://$PROJECT_DIR$/shuffler_result_223236" />
-    <entry file="file://$PROJECT_DIR$/shuffler_result_82808" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_Anas" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_employee_name" />
+    <entry file="file://$PROJECT_DIR$/employees2.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shuffler_result_68203" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_76664" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_92140" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_95552" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_119796" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_127022" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_134858" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_142761" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_146633" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_110256" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_104553" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_Yellow-crowned night heron" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_Water legaan" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_Suricate" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_Snow goose" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_Robin" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_Admiral" />
+    <entry file="file://$PROJECT_DIR$/employees1.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="69" selection-end-line="999" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/departments.csv">
-      <provider selected="true" editor-type-id="csv-text-editor" />
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
+      <provider selected="true" editor-type-id="csv-text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_248397" />
-    <entry file="file://$PROJECT_DIR$/shuffler_result_243778" />
-    <entry file="file://$PROJECT_DIR$/shuffler_result_240779" />
-    <entry file="file://$PROJECT_DIR$/shuffler_result_239040" />
-    <entry file="file://$PROJECT_DIR$/shuffler_result_249063" />
-    <entry file="file://$PROJECT_DIR$/shuffler_result_74626" />
     <entry file="file://$PROJECT_DIR$/shuffler_result_3000" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_61441" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_64935" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_80121" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_Woolly-necked stork" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_Wolf" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_Zebra" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_Zorilla" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_Zorro" />
+    <entry file="file://$PROJECT_DIR$/../pl-sql-compiler/src/res/loop.rb" />
+    <entry file="file://$APPLICATION_HOME_DIR$/rubystubs26/file.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="491">
+          <caret line="621" column="13" selection-start-line="621" selection-start-column="13" selection-end-line="621" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lemme.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shuffler_result_1000" />
+    <entry file="file://$PROJECT_DIR$/shuffler_result_60052" />
     <entry file="file://$PROJECT_DIR$/shuffler_result_60473" />
-    <entry file="file://$PROJECT_DIR$/shuffler_result_60787" />
-    <entry file="file://$PROJECT_DIR$/shuffler_result_249045" />
-    <entry file="file://$PROJECT_DIR$/shuffler_result_247285" />
-    <entry file="file://$PROJECT_DIR$/mapper_result_employees1.csv">
-      <provider selected="true" editor-type-id="csv-text-editor" />
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mapper_result_employees2.csv">
-      <provider selected="true" editor-type-id="csv-text-editor" />
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mapper_result_employees.csv">
-      <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/employees.csv">
-      <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="184">
-          <caret line="986" column="43" selection-start-line="986" selection-start-column="43" selection-end-line="986" selection-end-column="43" />
-        </state>
-      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="10" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
@@ -320,91 +570,103 @@
           <column index="3" width="100" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_66308" />
-    <entry file="file://$PROJECT_DIR$/shuffler_result_65941" />
-    <entry file="file://$PROJECT_DIR$/shuffler_result_65651" />
-    <entry file="file://$PROJECT_DIR$/shuffler_result_60519" />
-    <entry file="file://$PROJECT_DIR$/shuffler_result_60052" />
-    <entry file="file://$PROJECT_DIR$/shuffler_result_67116" />
-    <entry file="file://$PROJECT_DIR$/shuffler_result_249508" />
-    <entry file="file://$PROJECT_DIR$/shuffler_result_246304" />
-    <entry file="file://$PROJECT_DIR$/shuffler_result_63713" />
-    <entry file="file://$PROJECT_DIR$/shuffler_result_1000" />
-    <entry file="file://$PROJECT_DIR$/shuffler_result_2000" />
-    <entry file="file://$PROJECT_DIR$/shuffler_result_Anas">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_employee_name">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/employees2.csv">
       <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+        <state relative-caret-position="489">
+          <caret line="986" column="43" selection-start-line="986" selection-start-column="43" selection-end-line="986" selection-end-column="43" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shuffler_result_2000">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mapper_result_employees.csv">
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/employees1.csv">
       <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="69" selection-end-line="999" selection-end-column="40" />
+        <state relative-caret-position="-1462">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mapper_result_lemme.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mapper_result_employees2.csv">
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
+      <provider selected="true" editor-type-id="csv-text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_61441">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/mapper_result_employees1.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
+      <provider selected="true" editor-type-id="csv-text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_68203">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_76664">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_92140">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_95552">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_119796">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_127022">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_134858">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_142761">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_146633">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_110256">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shuffler_result_104553">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Main.rb">
+    <entry file="file://$APPLICATION_HOME_DIR$/rubystubs26/enumerable.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
+        <state relative-caret-position="-867" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/execution_plan_utilities.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="41" lean-forward="true" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
+          <folding>
+            <element signature="e#167#256#0" />
+            <element signature="e#267#415#0" />
+            <element signature="e#345#409#0" />
+            <element signature="e#419#727#0" />
+            <element signature="e#541#686#0" />
+            <element signature="e#618#677#0" />
+            <element signature="e#731#1116#0" />
+            <element signature="e#875#1110#0" />
+            <element signature="e#892#1102#2" />
+            <element signature="e#971#1078#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enumerable.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="3" lean-forward="true" selection-start-line="16" selection-start-column="3" selection-end-line="16" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mapper_result.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/map_reduce.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-130">
-          <caret line="143" lean-forward="true" selection-start-line="143" selection-end-line="143" />
+        <state relative-caret-position="68">
+          <caret line="108" lean-forward="true" selection-start-line="108" selection-end-line="108" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reducer_result.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="40" selection-start-line="40" selection-end-line="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="18" lean-forward="true" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
         </state>
       </provider>
     </entry>
