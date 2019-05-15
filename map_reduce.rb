@@ -1,4 +1,5 @@
 gem 'parallel'
+require 'json'
 require 'parallel'
 require 'stringio'
 require_relative 'enumerable'
@@ -8,7 +9,7 @@ module MapReduce
   DATA_TYPES_FILE_PATH = "C:\\Users\\ASUS\\Documents\\GitHub\\pl-sql-compiler\\output.json"
   MAPPER_RESULT_FILE = "mapper_result.txt"
   REDUCER_RESULT_FILE = "reducer_result.txt"
-  SHUFFLER_SUFFIX = "shuffler_result_"
+  SHUFFLER_RESULT_FILE = "shuffler_result.json"
 
   class Mapper
 
@@ -16,7 +17,7 @@ module MapReduce
 
     end
 
-    def map(records, aggregation_columns)
+    def mapper_without_shuffling(records, aggregation_columns)
 
       result_file = File.open(MapReduce::MAPPER_RESULT_FILE, "w")
 
@@ -32,60 +33,67 @@ module MapReduce
 
     end
 
+    def mapper_with_shuffling(records, grouping_columns, aggregation_columns)
+
+      result_file = File.open(MapReduce::MAPPER_RESULT_FILE, "w")
+
+      records.each do |record|
+
+        attributes = record.split(",")
+
+        result_file.puts "#{attributes.values_at(*grouping_columns).join(",")}:#{attributes.values_at(*aggregation_columns.map {|column| column[:index].to_i}).join(",")}"
+
+      end
+
+      result_file.close
+
+      MapReduce::MAPPER_RESULT_FILE
+
+    end
+
   end
 
   class Shuffler
 
 
-    def initialize
+    def initialize(input_file_name)
 
+      @input_file_name = input_file_name
 
     end
 
     def shuffle
 
+      result_file = File.open(MapReduce::SHUFFLER_RESULT_FILE, "w")
 
-    end
+      result_hash = {}
 
-    def memory_shuffle
+      File.foreach(@input_file_name) do |line|
 
-      value_index = @data_types_order.index(@key.upcase)
+        key_values = line.split(":")
+        key = key_values[0]
+        values = key_values[1]
 
-      file_content = File.read(@file_name)
+        result_hash[key] = [] unless result_hash[key]
 
-      files = Hash.new("")
+        values.split(",").each_with_index do |value, index|
 
-      file_content.each_line do |line|
+          result_hash[key][index] = [] unless result_hash[key][index]
 
-        attributes = line.split(",")
+          result_hash[key][index] << value.chomp
 
-        line_key = attributes[value_index]
-
-        current_file_name = SHUFFLER_SUFFIX + line_key
-
-        files[current_file_name] = files[current_file_name] + line
-
-      end
-
-      file_threads = []
-
-      files.each_pair do |key, value|
-
-        file_threads << Thread.new {
-
-          current_file = File.open(key.chomp, "w")
-
-          current_file.write value
-
-          current_file.close
-
-        }
+        end
 
       end
 
-      ThreadsWait.all_waits(file_threads)
+      result_file.puts JSON.generate(result_hash)
+
+      result_file.close
+
+      MapReduce::SHUFFLER_RESULT_FILE
 
     end
+
 
   end
 
@@ -108,28 +116,27 @@ module MapReduce
       File.foreach(@input_file) do |line|
 
 
-
         result_file.puts case @aggregation_columns[line_number][:function]
 
-        when :SUM
-          line.split(",").map(&:to_i).sum
+                         when :SUM
+                           line.split(",").map(&:to_i).sum
 
-        when :MAX
-          line.split(",").map(&:to_i).max
+                         when :MAX
+                           line.split(",").map(&:to_i).max
 
-        when :MIN
-          line.split(",").map(&:to_i).min
+                         when :MIN
+                           line.split(",").map(&:to_i).min
 
-        when :AVG
-          line.split(",").map(&:to_i).avg
+                         when :AVG
+                           line.split(",").map(&:to_i).avg
 
-        when :STDEV
-          line.split(",").map(&:to_i).stdev
+                         when :STDEV
+                           line.split(",").map(&:to_i).stdev
 
-        when :VARIANCE
-          line.split(",").map(&:to_i).variance
+                         when :VARIANCE
+                           line.split(",").map(&:to_i).variance
 
-        end
+                         end
 
 
         line_number += 1
@@ -137,6 +144,50 @@ module MapReduce
       end
 
       result_file.close
+
+    end
+
+    def reduce_with_shuffle
+
+
+      input_hash = JSON.parse(File.read(@input_file))
+
+      output_file = File.open(MapReduce::REDUCER_RESULT_FILE, "w")
+
+      input_hash.each_key do |key|
+
+        input_hash[key].each_with_index do |array_value, index|
+
+
+          output_file.puts key + " : " +  case @aggregation_columns[index][:function]
+
+                           when :SUM
+                             array_value.map(&:to_i).sum.to_s
+
+                           when :MAX
+                             array_value.map(&:to_i).max.to_s
+
+                           when :MIN
+                             array_value.map(&:to_i).min.to_s
+
+                           when :AVG
+                             array_value.map(&:to_i).avg.to_s
+
+                           when :STDEV
+                             array_value.map(&:to_i).stdev.to_s
+
+                           when :VARIANCE
+                             array_value.map(&:to_i).variance.to_s
+
+                           end
+
+        end
+
+      end
+
+      output_file.close
+
+      MapReduce::REDUCER_RESULT_FILE
 
     end
 

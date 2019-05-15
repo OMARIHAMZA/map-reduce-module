@@ -17,6 +17,8 @@ threads = []
 begin
 
   join_type = "null"
+  grouping_columns = []
+
   ordering_columns = []
 
   selection_columns = []
@@ -35,17 +37,15 @@ begin
 
   end
 
-  aggregation_columns = [{:function=>:AVG,:index=>ExecutionPlanUtilities::get_column_index("employees", "salary")},{:function=>:MAX,:index=>ExecutionPlanUtilities::get_column_index("employees", "salary")},{:function=>:MIN,:index=>ExecutionPlanUtilities::get_column_index("employees", "employee_id")},]
+  aggregation_columns = [{:function=>:AVG,:index=>ExecutionPlanUtilities::get_column_index("employees", "salary")},{:function=>:MAX,:index=>ExecutionPlanUtilities::get_column_index("employees", "salary")},]
 
-  input_file_name = MapReduce::Mapper.new.map(records, aggregation_columns)
+  grouping_columns << ExecutionPlanUtilities::get_column_index("employees", "department_id")
 
-  MapReduce::Reducer.new(input_file_name, aggregation_columns).reduce_without_shuffle
 
   if aggregation_columns.empty?
 
     selection_columns << 0 + ExecutionPlanUtilities::get_column_index("avg(employees", "salary)")
     selection_columns << 0 + ExecutionPlanUtilities::get_column_index("max(employees", "salary)")
-    selection_columns << 0 + ExecutionPlanUtilities::get_column_index("min(employees", "salary)")
 
   end
   records.sort_by!{|record| [ ]}
@@ -53,11 +53,24 @@ begin
     records.map!{|record| record.split(",").values_at(*selection_columns).join(",")}
   end
 
-  records.uniq! if false
+  mapper_file_name = MapReduce::Mapper.new.mapper_with_shuffling(records, grouping_columns, aggregation_columns)
 
+  shuffler_file_name = MapReduce::Shuffler.new(mapper_file_name).shuffle
+
+  MapReduce::Reducer.new(shuffler_file_name, aggregation_columns).reduce_with_shuffle
+
+
+  records.uniq! if false
   puts records
 
-  puts aggregation_columns.to_s
+
+
+
+=begin
+  input_file_name = MapReduce::Mapper.new.map(records, aggregation_columns)
+
+  MapReduce::Reducer.new(input_file_name, aggregation_columns).reduce_without_shuffle
+=end
 
 =begin
   Parallel.each(files, in_threads: 1) do |file_name|
