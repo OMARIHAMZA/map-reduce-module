@@ -131,32 +131,49 @@ module MapReduce
 
       File.foreach(@input_file) do |line|
 
+        values_array = line.split(",")
+
+        values_array = map_array_by_type(values_array, line_number)
 
         result_file.puts case @aggregation_columns[line_number][:function]
 
                          when :SUM
-                           line.split(",").map(&:to_i).sum
+                           values_array.sum.to_s
 
                          when :MAX
-                           line.split(",").map(&:to_i).max
+                           values_array.max.to_s
 
                          when :MIN
-                           line.split(",").map(&:to_i).min
+                           values_array.min.to_s
 
                          when :AVG
-                           line.split(",").map(&:to_i).avg
+                           @aggregation_columns[index][:distinct] ?
+                               values_array.uniq.avg.to_s :
+                               values_array.avg.to_s
 
                          when :STDEV
-                           line.split(",").map(&:to_i).stdev
+                           @aggregation_columns[index][:distinct] ?
+                               values_array.uniq.stdev.to_s :
+                               values_array.stdev.to_s
 
                          when :VARIANCE
-                           line.split(",").map(&:to_i).variance
+                           @aggregation_columns[index][:distinct] ?
+                               values_array.uniq.variance.to_s :
+                               values_array.variance.to_s
+
+                         when :COUNT
+                           if @aggregation_columns[index][:index] == -1
+                             values_array.size.to_s
+                           else
+                             @aggregation_columns[index][:distinct] ?
+                                 values_array.uniq.size.to_s :
+                                 values_array.size {|value| !value.empty?}.to_s
+                           end
+
+
+                           line_number += 1
 
                          end
-
-
-        line_number += 1
-
       end
 
       result_file.close
@@ -170,40 +187,77 @@ module MapReduce
 
       output_file = File.open(MapReduce::REDUCER_RESULT_FILE, "w")
 
+
       input_hash.each_key do |key|
+
+        output_file.write key
 
         input_hash[key].each_with_index do |array_value, index|
 
+          array_value = map_array_by_type(array_value, index)
 
-          output_file.puts key + " : " +  case @aggregation_columns[index][:function]
+          output_file.write "," + case @aggregation_columns[index][:function]
 
-                           when :SUM
-                             array_value.map(&:to_i).sum.to_s
+                                  when :SUM
+                                    array_value.sum.to_s
 
-                           when :MAX
-                             array_value.map(&:to_i).max.to_s
+                                  when :MAX
+                                    array_value.max.to_s
 
-                           when :MIN
-                             array_value.map(&:to_i).min.to_s
+                                  when :MIN
+                                    array_value.min.to_s
 
-                           when :AVG
-                             array_value.map(&:to_i).avg.to_s
+                                  when :AVG
+                                    @aggregation_columns[index][:distinct] ?
+                                        array_value.uniq.avg.to_s :
+                                        array_value.avg.to_s
 
-                           when :STDEV
-                             array_value.map(&:to_i).stdev.to_s
+                                  when :STDEV
+                                    @aggregation_columns[index][:distinct] ?
+                                        array_value.uniq.stdev.to_s :
+                                        array_value.stdev.to_s
 
-                           when :VARIANCE
-                             array_value.map(&:to_i).variance.to_s
+                                  when :VARIANCE
+                                    @aggregation_columns[index][:distinct] ?
+                                        array_value.uniq.variance.to_s :
+                                        array_value.variance.to_s
 
-                           end
+                                  when :COUNT
+                                    if @aggregation_columns[index][:index] == -1
+                                      array_value.size.to_s
+                                    else
+                                      @aggregation_columns[index][:distinct] ?
+                                          array_value.uniq.size.to_s :
+                                          array_value.size {|value| !value.empty?}.to_s
+                                    end
+
+
+                                  end
 
         end
+
+        output_file.puts
 
       end
 
       output_file.close
 
       MapReduce::REDUCER_RESULT_FILE
+
+    end
+
+
+    def map_array_by_type(array, index)
+
+      case @aggregation_columns[index][:type]
+
+      when :INT;
+        array.map(&:to_i)
+      when :FLOAT;
+        array.map(&:to_f)
+      else
+        array
+      end
 
     end
 
