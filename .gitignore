@@ -1,7 +1,7 @@
 *.gem
 *.rbc
 *.csv
-.idea/
+.gitignore
 /.config
 /coverage/
 /InstalledFiles
@@ -50,3 +50,6 @@ build-iPhoneSimulator/
 
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
+
+/lemme.txt
+/mapper_result_lemme.txt
