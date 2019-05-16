@@ -4,6 +4,9 @@ require 'parallel'
 require 'stringio'
 require_relative 'enumerable'
 
+##
+# This module implements MapReduce algorithms to be used in code generation for SQL compiler
+
 module MapReduce
 
   DATA_TYPES_FILE_PATH = "C:\\Users\\ASUS\\Documents\\GitHub\\pl-sql-compiler\\output.json"
@@ -11,15 +14,26 @@ module MapReduce
   REDUCER_RESULT_FILE = "reducer_result.txt"
   SHUFFLER_RESULT_FILE = "shuffler_result.json"
 
+  ##
+  # This class maps every key (group by column)
+  # with a corresponding value (value used inside aggregation functions)
+
   class Mapper
 
     def initialize
 
     end
 
+    ##
+    # If there are no grouping columns there is no need for a shuffler
+    # Or call the shuffler otherwise
+    #
+
     def map(records, grouping_columns, aggregation_columns)
 
-      grouping_columns.empty? ? mapper_without_shuffling(records, aggregation_columns) : mapper_with_shuffling(records, grouping_columns, aggregation_columns)
+      grouping_columns.empty? ? # No group by columns so no shuffler
+          mapper_without_shuffling(records, aggregation_columns) :
+          mapper_with_shuffling(records, grouping_columns, aggregation_columns) # Grouping columns exit so we need a shuffler
 
     end
 
@@ -58,6 +72,12 @@ module MapReduce
     end
 
   end
+
+  ##
+  # This class represents a shuffler which takes a mapper output (K,V) pairs
+  # and creates lists that contain all values for a corresponding key
+  # example: "key1":[v1,v2]
+  #          "key2" : [v3,v5]
 
   class Shuffler
 
@@ -103,6 +123,9 @@ module MapReduce
 
   end
 
+  ##
+  # A reducer can take a shuffler or a mapper result
+  # and reduces the list of each key to single value
 
   class Reducer
 
@@ -119,7 +142,9 @@ module MapReduce
 
     def reduce
 
-      @grouping_columns.empty? ? reduce_without_shuffle : reduce_with_shuffle
+      @grouping_columns.empty? ? #No grouping functions so we are reducing without a previous shuffler
+          reduce_without_shuffle :
+          reduce_with_shuffle
 
     end
 

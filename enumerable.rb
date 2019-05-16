@@ -1,3 +1,6 @@
+##
+# Extend the enumerable module with avg,variance,and standard deviation
+
 module Enumerable
 
   def avg
