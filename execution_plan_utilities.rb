@@ -65,8 +65,9 @@ module ExecutionPlanUtilities
 
   def self.process_subselect_statement(records, table_alias, members)
 
+    FileUtils.mkdir_p("C:\\Users\\ASUS\\Documents\\GitHub\\map-reduce-module\\" + table_alias)
     # Write the result to a temp csv file
-    File.open(table_alias + ".csv", "w") do |file|
+    File.open(table_alias + "/" + table_alias + ".csv", "w") do |file|
       file.puts records
     end
 
