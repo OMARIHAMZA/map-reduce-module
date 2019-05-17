@@ -10,20 +10,15 @@ require_relative 'execution_plan_utilities'
 
 start = Time.now
 
-files = %w(employees.csv)
-
-threads = []
-
 begin
 
-  join_type = "null"
+
   grouping_columns = []
-
   ordering_columns = []
-
   selection_columns = []
-
   records = []
+
+  join_type = "null"
   employees_table_location = ExecutionPlanUtilities.get_table_location("employees")
   employees_csv_files = ExecutionPlanUtilities.get_csv_files(employees_table_location)
   employees_file_index = 0
@@ -37,46 +32,73 @@ begin
 
   end
 
-  aggregation_columns = [{:function=>:COUNT,:index=>-1},{:function=>:COUNT,:index=>ExecutionPlanUtilities::get_column_index("employees", "salary"),:type=>:INT,:distinct=>:DISTINCT},]
+  aggregation_columns = []
 
-  grouping_columns << ExecutionPlanUtilities::get_column_index("employees", "salary") + 0
 
-  records.sort_by!{|record| [ ]}
+  if aggregation_columns.empty?
+
+    selection_columns << 0 + ExecutionPlanUtilities::get_column_index("employees", "employee_name")
+
+  end
+  records.sort_by! {|record| []}
   unless selection_columns.empty?
-    records.map!{|record| record.split(",").values_at(*selection_columns).join(",")}
+    records.map! {|record| record.split(",").values_at(*selection_columns).join(",")}
   end
 
   records.uniq! if false
-  mapper_file_name = MapReduce::Mapper.new.map(records, grouping_columns, aggregation_columns)
+  unless aggregation_columns.empty?
 
-  shuffler_file_name = MapReduce::Shuffler.new(mapper_file_name).shuffle
+    mapper_file_name = MapReduce::Mapper.new.map(records, grouping_columns, aggregation_columns)
 
-  MapReduce::Reducer.new(shuffler_file_name, grouping_columns, aggregation_columns).reduce
+    shuffler_file_name = MapReduce::Shuffler.new(mapper_file_name).shuffle
+
+    MapReduce::Reducer.new(shuffler_file_name, grouping_columns, aggregation_columns).reduce
+
+  end
+
+  ExecutionPlanUtilities.process_subselect_statement(records, "E", [{"EMPLOYEE_NAME": "STRING"}])
+
+  join_type = "null"
+
+
+  join_type = "null"
+
+  aggregation_columns = []
+  selection_columns = []
+  records = []
+  join_type = "null"
+  e_table_location = "C:\\Users\\ASUS\\Documents\\GitHub\\map-reduce-module"
+  e_csv_files = %w(E.csv)
+  e_file_index = 0
+  e_pos = 0
+
+  until e_file_index == e_csv_files.length
+
+    e_line, e_file_index, e_pos = ExecutionPlanUtilities.read_record(e_table_location, e_csv_files, e_file_index, e_pos)
+
+    records << e_line.chomp if true
+
+  end
+
+
+  records.sort_by! {|record| []}
+  unless selection_columns.empty?
+    records.map! {|record| record.split(",").values_at(*selection_columns).join(",")}
+  end
+
+  records.uniq! if false
+  unless aggregation_columns.empty?
+
+    mapper_file_name = MapReduce::Mapper.new.map(records, grouping_columns, aggregation_columns)
+
+    shuffler_file_name = MapReduce::Shuffler.new(mapper_file_name).shuffle
+
+    MapReduce::Reducer.new(shuffler_file_name, grouping_columns, aggregation_columns).reduce
+
+  end
 
   puts records
 
-=begin
-  input_file_name = MapReduce::Mapper.new.map(records, aggregation_columns)
-
-  MapReduce::Reducer.new(input_file_name, aggregation_columns).reduce_without_shuffle
-=end
-
-=begin
-  Parallel.each(files, in_threads: 1) do |file_name|
-
-
-    data_types_order, data_members = MapReduce::Mapper.new("EMPLOYEES",
-                                                           file_name, "SALARY > 1000").map
-
-
-    MapReduce::Shuffler.new(file_name, "SALARY", data_types_order).memory_shuffle
-
-    puts MapReduce::Reducer.new(file_name, "SALARY", data_types_order, data_members).reduce
-
-  end
-=end
-
 end
-
 
 puts Time.now - start
