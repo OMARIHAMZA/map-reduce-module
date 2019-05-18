@@ -131,7 +131,7 @@ begin
 
   d_department_name_index = ExecutionPlanUtilities::get_column_index("d", "department_name")
 
-  records.keep_if {|record| record.split(",")[4 + d_department_name_index]!="Meme Review"}
+  records.keep_if {|record| record.split(",")[4 + d_department_name_index]!="Support"}
   aggregation_columns = []
 
 
