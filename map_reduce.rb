@@ -10,9 +10,9 @@ require_relative 'enumerable'
 module MapReduce
 
   DATA_TYPES_FILE_PATH = "C:\\Users\\ASUS\\Documents\\GitHub\\pl-sql-compiler\\output.json"
-  MAPPER_RESULT_FILE = "mapper_result.txt"
-  REDUCER_RESULT_FILE = "reducer_result.txt"
-  SHUFFLER_RESULT_FILE = "shuffler_result.json"
+  MAPPER_RESULT_FILE = "C:\\Users\\ASUS\\Documents\\GitHub\\pl-sql-compiler\\ruby\\mapper_result.txt"
+  REDUCER_RESULT_FILE = "C:\\Users\\ASUS\\Documents\\GitHub\\pl-sql-compiler\\ruby\\reducer_result.txt"
+  SHUFFLER_RESULT_FILE = "C:\\Users\\ASUS\\Documents\\GitHub\\pl-sql-compiler\\ruby\\shuffler_result.json"
 
   ##
   # This class maps every key (group by column)
@@ -267,6 +267,9 @@ module MapReduce
                                             array_value.uniq.size.to_s :
                                             array_value.size {|value| !value.empty?}.to_s
                                       end
+
+                                    when :SUMMARIZE
+                                      "Mean: #{array_value.mean}, Median: #{array_value.median {|n| n}}, Mode: #{array_value.mode}, Min: #{array_value.min}, Max: #{array_value.max}, Q2: #{array_value.median {|n| n}}, Q3: #{array_value.q3 {|n| n}}, STD: #{array_value.stdev}, Count: #{array_value.size}"
 
 
                                     end

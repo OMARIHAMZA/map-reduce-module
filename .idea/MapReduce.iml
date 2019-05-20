@@ -5,8 +5,8 @@
   </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$" />
-    <orderEntry type="jdk" jdkName="ruby-2.5.3-p105" jdkType="RUBY_SDK" />
+    <orderEntry type="jdk" jdkName="ruby-2.6.1-p33" jdkType="RUBY_SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="parallel (v1.17.0, ruby-2.5.3-p105) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="parallel (v1.17.0, ruby-2.6.1-p33) [gem]" level="application" />
   </component>
 </module>

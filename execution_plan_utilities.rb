@@ -5,12 +5,8 @@ module ExecutionPlanUtilities
 
     @json_array = JSON.parse File.read(MapReduce::DATA_TYPES_FILE_PATH)
     @json_array.map do |entry|
-
       return entry["location"] if entry["name"].casecmp?(table_name)
-
     end
-
-
   end
 
   def self.get_csv_files(table_location)
