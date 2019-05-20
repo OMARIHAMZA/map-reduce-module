@@ -94,6 +94,8 @@ module MapReduce
 
       result_hash = {}
 
+      puts result_file
+
       File.foreach(@input_file_name) do |line|
 
         key_values = line.split(":")
@@ -148,57 +150,60 @@ module MapReduce
 
     def reduce_without_shuffle
 
-      line_number = 0
+      line_number = -1
 
       result_file = File.open(MapReduce::REDUCER_RESULT_FILE, "w")
 
+      result_string = ""
+
       File.foreach(@input_file) do |line|
+
+        line_number += 1
 
         values_array = line.split(",")
 
         values_array = map_array_by_type(values_array, line_number)
 
-        result_file.puts case @aggregation_columns[line_number][:function]
+        result_string << case @aggregation_columns[line_number][:function]
 
-                         when :SUM
-                           values_array.sum.to_s
+                 when :SUM
+                   values_array.sum.to_s
 
-                         when :MAX
-                           values_array.max.to_s
+                 when :MAX
+                   values_array.max.to_s
 
-                         when :MIN
-                           values_array.min.to_s
+                 when :MIN
+                   values_array.min.to_s
 
-                         when :AVG
-                           @aggregation_columns[index][:distinct] ?
-                               values_array.uniq.avg.to_s :
-                               values_array.avg.to_s
+                 when :AVG
+                   @aggregation_columns[line_number][:distinct] ?
+                       values_array.uniq.avg.to_s :
+                       values_array.avg.to_s
 
-                         when :STDEV
-                           @aggregation_columns[index][:distinct] ?
-                               values_array.uniq.stdev.to_s :
-                               values_array.stdev.to_s
+                 when :STDEV
+                   @aggregation_columns[line_number][:distinct] ?
+                       values_array.uniq.stdev.to_s :
+                       values_array.stdev.to_s
 
-                         when :VARIANCE
-                           @aggregation_columns[index][:distinct] ?
-                               values_array.uniq.variance.to_s :
-                               values_array.variance.to_s
+                 when :VARIANCE
+                   @aggregation_columns[line_number][:distinct] ?
+                       values_array.uniq.variance.to_s :
+                       values_array.variance.to_s
 
-                         when :COUNT
-                           if @aggregation_columns[index][:index] == -1
-                             values_array.size.to_s
-                           else
-                             @aggregation_columns[index][:distinct] ?
-                                 values_array.uniq.size.to_s :
-                                 values_array.size {|value| !value.empty?}.to_s
-                           end
+                 when :COUNT
+                   if @aggregation_columns[line_number][:index] == -1
+                     values_array.size.to_s
+                   else
+                     @aggregation_columns[line_number][:distinct] ?
+                         values_array.uniq.size.to_s :
+                         values_array.size {|value| !value.empty?}.to_s
+                   end
 
+                 end + ","
 
-                           line_number += 1
-
-                         end
       end
 
+      result_file.puts result_string.chomp(",")
       result_file.close
 
     end
@@ -290,6 +295,11 @@ module MapReduce
         end
 
       end unless @having_conditions.empty?
+
+
+      result_array.map! do |line|
+        line.split(",").values_at(*(0...@aggregation_columns.length).to_a).join(",")
+      end
 
       output_file.puts result_array
 

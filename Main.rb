@@ -32,18 +32,10 @@ begin
 
   end
 
-  having_conditions = [{:function=>:COUNT,:index=>1,:condition=>"<6",:function_after_condition=>false,:type=>:INT},]
-  aggregation_columns = [{:function=>:COUNT,:index=>ExecutionPlanUtilities::get_column_index("employees", "employee_id"),:type=>:INT,:distinct=>nil},]
-
-  grouping_columns << ExecutionPlanUtilities::get_column_index("employees", "department_id") + 0
+  having_conditions = []
+  aggregation_columns = [{:function=>:COUNT,:index=>-1},{:function=>:SUM,:index=>ExecutionPlanUtilities::get_column_index("employees", "salary"),:type=>:INT,:distinct=>nil},]
 
 
-  if aggregation_columns.empty?
-
-    selection_columns << 0 + ExecutionPlanUtilities::get_column_index("count(employees", "employee_id)")
-    selection_columns << 0 + ExecutionPlanUtilities::get_column_index("employees", "department_id")
-
-  end
   records.sort_by!{|record| [ ]}
   unless selection_columns.empty?
     records.map!{|record| record.split(",").values_at(*selection_columns).join(",")}
@@ -54,9 +46,11 @@ begin
 
     mapper_file_name = MapReduce::Mapper.new.map(records, grouping_columns, aggregation_columns)
 
-    shuffler_file_name = MapReduce::Shuffler.new(mapper_file_name).shuffle
+    shuffler_file_name = ""
 
-    MapReduce::Reducer.new(shuffler_file_name, grouping_columns, aggregation_columns, having_conditions).reduce
+    shuffler_file_name = MapReduce::Shuffler.new(mapper_file_name).shuffle unless grouping_columns.empty?
+
+    MapReduce::Reducer.new(grouping_columns.empty? ? mapper_file_name : shuffler_file_name, grouping_columns, aggregation_columns, having_conditions).reduce
 
   end
 
