@@ -129,14 +129,12 @@ module MapReduce
 
   class Reducer
 
-    def initialize(input_file, grouping_columns, aggregation_columns)
+    def initialize(input_file, grouping_columns, aggregation_columns, having_conditions)
 
       @input_file = input_file
       @grouping_columns = grouping_columns
       @aggregation_columns = aggregation_columns
-
-      puts grouping_columns.to_s
-      puts aggregation_columns.to_s
+      @having_conditions = having_conditions
 
     end
 
@@ -208,62 +206,92 @@ module MapReduce
     def reduce_with_shuffle
 
 
+      puts @having_conditions
+
       input_hash = JSON.parse(File.read(@input_file))
 
       output_file = File.open(MapReduce::REDUCER_RESULT_FILE, "w")
 
 
+      result_array = []
+
       input_hash.each_key do |key|
 
-        output_file.write key
+        file_contents = StringIO.new
+
+        file_contents.write key
 
         input_hash[key].each_with_index do |array_value, index|
 
           array_value = map_array_by_type(array_value, index)
 
-          output_file.write "," + case @aggregation_columns[index][:function]
+          file_contents.write "," + case @aggregation_columns[index][:function]
 
-                                  when :SUM
-                                    array_value.sum.to_s
+                                    when :SUM
+                                      array_value.sum.to_s
 
-                                  when :MAX
-                                    array_value.max.to_s
+                                    when :MAX
+                                      array_value.max.to_s
 
-                                  when :MIN
-                                    array_value.min.to_s
+                                    when :MIN
+                                      array_value.min.to_s
 
-                                  when :AVG
-                                    @aggregation_columns[index][:distinct] ?
-                                        array_value.uniq.avg.to_s :
-                                        array_value.avg.to_s
-
-                                  when :STDEV
-                                    @aggregation_columns[index][:distinct] ?
-                                        array_value.uniq.stdev.to_s :
-                                        array_value.stdev.to_s
-
-                                  when :VARIANCE
-                                    @aggregation_columns[index][:distinct] ?
-                                        array_value.uniq.variance.to_s :
-                                        array_value.variance.to_s
-
-                                  when :COUNT
-                                    if @aggregation_columns[index][:index] == -1
-                                      array_value.size.to_s
-                                    else
+                                    when :AVG
                                       @aggregation_columns[index][:distinct] ?
-                                          array_value.uniq.size.to_s :
-                                          array_value.size {|value| !value.empty?}.to_s
+                                          array_value.uniq.avg.to_s :
+                                          array_value.avg.to_s
+
+                                    when :STDEV
+                                      @aggregation_columns[index][:distinct] ?
+                                          array_value.uniq.stdev.to_s :
+                                          array_value.stdev.to_s
+
+                                    when :VARIANCE
+                                      @aggregation_columns[index][:distinct] ?
+                                          array_value.uniq.variance.to_s :
+                                          array_value.variance.to_s
+
+                                    when :COUNT
+                                      if @aggregation_columns[index][:index] == -1
+                                        array_value.size.to_s
+                                      else
+                                        @aggregation_columns[index][:distinct] ?
+                                            array_value.uniq.size.to_s :
+                                            array_value.size {|value| !value.empty?}.to_s
+                                      end
+
+
                                     end
-
-
-                                  end
 
         end
 
-        output_file.puts
+        result_array << file_contents.string
 
       end
+
+      result_array.keep_if do |line|
+
+        attributes = line.split(",")
+
+        @having_conditions.each do |condition|
+
+          current_condition = ""
+
+          if condition[:function_after_condition]
+            current_condition = condition[:condition] + attributes[condition[:index]]
+          else
+            current_condition = attributes[condition[:index]] + condition[:condition]
+          end
+
+          break false unless eval(current_condition)
+
+          true
+
+        end
+
+      end unless @having_conditions.empty?
+
+      output_file.puts result_array
 
       output_file.close
 
