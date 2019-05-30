@@ -27,23 +27,35 @@ begin
   until employees_file_index == employees_csv_files.length
 
     employees_line, employees_file_index, employees_pos = ExecutionPlanUtilities.read_record(employees_table_location, employees_csv_files, employees_file_index, employees_pos)
+
     records << employees_line.chomp if true
 
   end
 
   having_conditions = []
-  aggregation_columns = [{:function=>:SUMMARIZE,:index=>ExecutionPlanUtilities::get_column_index("employees", "salary"),:type=>:INT,:distinct=>nil},]
+  aggregation_columns = []
 
-  grouping_columns << ExecutionPlanUtilities::get_column_index("employees", "department_id") + 0
 
 
   if aggregation_columns.empty?
 
-    selection_columns << 0 + ExecutionPlanUtilities::get_column_index("employees", "department_id")
-    selection_columns << 0 + ExecutionPlanUtilities::get_column_index("summarize(employees", "salary)")
 
   end
   records.sort_by!{|record| [ ]}
+  analytical_keys = []
+  analytical_aggregation_columns = [{:function=>:MAX,:index=>ExecutionPlanUtilities::get_column_index("employees", "salary"),:type=>:INT,:distinct=>nil},]
+  analytical_keys << ExecutionPlanUtilities::get_column_index("EMPLOYEES", "DEPARTMENT_ID")
+
+  analytical_keys << ExecutionPlanUtilities::get_column_index("EMPLOYEES", "EMPLOYEE_NAME")
+
+  mapper_file_name = MapReduce::Mapper.new.map(records, analytical_keys, analytical_aggregation_columns)
+
+  shuffler_file_name = ""
+
+  shuffler_file_name = MapReduce::Shuffler.new(mapper_file_name).shuffle unless analytical_keys.empty?
+
+  analytical_mapping = MapReduce::Reducer.new(analytical_keys.empty? ? mapper_file_name : shuffler_file_name, analytical_keys, analytical_aggregation_columns, "").reduce
+
   unless selection_columns.empty?
     records.map!{|record| record.split(",").values_at(*selection_columns).join(",")}
   end
@@ -62,6 +74,20 @@ begin
     puts File.read(MapReduce::REDUCER_RESULT_FILE)
 
   end
+
+  records = records.map do |record|
+
+    if analytical_keys.empty?
+
+      "#{record},#{File.read(MapReduce::REDUCER_RESULT_FILE)}"
+
+    else
+
+      "#{record},#{analytical_mapping[record.split(',').values_at(*analytical_keys).join(',')]}"
+
+    end
+
+  end unless analytical_aggregation_columns.empty?
 
   puts records if aggregation_columns.empty?
 

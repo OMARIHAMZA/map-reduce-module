@@ -94,8 +94,6 @@ module MapReduce
 
       result_hash = {}
 
-      puts result_file
-
       File.foreach(@input_file_name) do |line|
 
         key_values = line.split(":")
@@ -214,7 +212,7 @@ module MapReduce
     def reduce_with_shuffle
 
 
-      puts @having_conditions
+      analytical_mapping = {}
 
       input_hash = JSON.parse(File.read(@input_file))
 
@@ -233,46 +231,50 @@ module MapReduce
 
           array_value = map_array_by_type(array_value, index)
 
-          file_contents.write "," + case @aggregation_columns[index][:function]
+          value = case @aggregation_columns[index][:function]
 
-                                    when :SUM
-                                      array_value.sum.to_s
+                  when :SUM
+                    array_value.sum.to_s
 
-                                    when :MAX
-                                      array_value.max.to_s
+                  when :MAX
+                    array_value.max.to_s
 
-                                    when :MIN
-                                      array_value.min.to_s
+                  when :MIN
+                    array_value.min.to_s
 
-                                    when :AVG
-                                      @aggregation_columns[index][:distinct] ?
-                                          array_value.uniq.avg.to_s :
-                                          array_value.avg.to_s
+                  when :AVG
+                    @aggregation_columns[index][:distinct] ?
+                        array_value.uniq.avg.to_s :
+                        array_value.avg.to_s
 
-                                    when :STDEV
-                                      @aggregation_columns[index][:distinct] ?
-                                          array_value.uniq.stdev.to_s :
-                                          array_value.stdev.to_s
+                  when :STDEV
+                    @aggregation_columns[index][:distinct] ?
+                        array_value.uniq.stdev.to_s :
+                        array_value.stdev.to_s
 
-                                    when :VARIANCE
-                                      @aggregation_columns[index][:distinct] ?
-                                          array_value.uniq.variance.to_s :
-                                          array_value.variance.to_s
+                  when :VARIANCE
+                    @aggregation_columns[index][:distinct] ?
+                        array_value.uniq.variance.to_s :
+                        array_value.variance.to_s
 
-                                    when :COUNT
-                                      if @aggregation_columns[index][:index] == -1
-                                        array_value.size.to_s
-                                      else
-                                        @aggregation_columns[index][:distinct] ?
-                                            array_value.uniq.size.to_s :
-                                            array_value.size {|value| !value.empty?}.to_s
-                                      end
+                  when :COUNT
+                    if @aggregation_columns[index][:index] == -1
+                      array_value.size.to_s
+                    else
+                      @aggregation_columns[index][:distinct] ?
+                          array_value.uniq.size.to_s :
+                          array_value.size {|value| !value.empty?}.to_s
+                    end
 
-                                    when :SUMMARIZE
-                                      "Mean: #{array_value.mean}, Median: #{array_value.median {|n| n}}, Mode: #{array_value.mode}, Min: #{array_value.min}, Max: #{array_value.max}, Q2: #{array_value.median {|n| n}}, Q3: #{array_value.q3 {|n| n}}, STD: #{array_value.stdev}, Count: #{array_value.size}"
+                  when :SUMMARIZE
+                    "Mean: #{array_value.mean}, Median: #{array_value.median {|n| n}}, Mode: #{array_value.mode}, Min: #{array_value.min}, Max: #{array_value.max}, Q2: #{array_value.median {|n| n}}, Q3: #{array_value.q3 {|n| n}}, STD: #{array_value.stdev}, Count: #{array_value.size}"
 
 
-                                    end
+                  end
+
+          file_contents.write "," + value
+
+          analytical_mapping[key] = value
 
         end
 
@@ -302,16 +304,11 @@ module MapReduce
 
       end unless @having_conditions.empty?
 
-
-      result_array.map! do |line|
-        line.split(",").values_at(*(0...@aggregation_columns.length).to_a).join(",")
-      end
-
       output_file.puts result_array
 
       output_file.close
 
-      MapReduce::REDUCER_RESULT_FILE
+      analytical_mapping
 
     end
 
