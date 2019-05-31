@@ -12,6 +12,10 @@ start = Time.now
 
 begin
 
+  ExecutionPlanUtilities::init_execution_plan_file()
+
+  query_counter = 0
+
 
   grouping_columns = []
   ordering_columns = []
@@ -37,24 +41,7 @@ begin
 
 
 
-  if aggregation_columns.empty?
-
-
-  end
   records.sort_by!{|record| [ ]}
-  analytical_keys = []
-  analytical_aggregation_columns = [{:function=>:MAX,:index=>ExecutionPlanUtilities::get_column_index("employees", "salary"),:type=>:INT,:distinct=>nil},]
-  analytical_keys << ExecutionPlanUtilities::get_column_index("EMPLOYEES", "DEPARTMENT_ID")
-
-  analytical_keys << ExecutionPlanUtilities::get_column_index("EMPLOYEES", "EMPLOYEE_NAME")
-
-  mapper_file_name = MapReduce::Mapper.new.map(records, analytical_keys, analytical_aggregation_columns)
-
-  shuffler_file_name = ""
-
-  shuffler_file_name = MapReduce::Shuffler.new(mapper_file_name).shuffle unless analytical_keys.empty?
-
-  analytical_mapping = MapReduce::Reducer.new(analytical_keys.empty? ? mapper_file_name : shuffler_file_name, analytical_keys, analytical_aggregation_columns, "").reduce
 
   unless selection_columns.empty?
     records.map!{|record| record.split(",").values_at(*selection_columns).join(",")}
@@ -75,21 +62,64 @@ begin
 
   end
 
-  records = records.map do |record|
+  puts records if aggregation_columns.empty? && ! true
 
-    if analytical_keys.empty?
+  ExecutionPlanUtilities::write_query_to_file(records, query_counter)
+  query_counter += 1
+  join_type = "null"
+  tab_table_location = ExecutionPlanUtilities.get_table_location("tab")
+  tab_csv_files = ExecutionPlanUtilities.get_csv_files(tab_table_location)
+  tab_file_index = 0
+  tab_pos = 0
 
-      "#{record},#{File.read(MapReduce::REDUCER_RESULT_FILE)}"
+  until tab_file_index == tab_csv_files.length
 
-    else
+    tab_line, tab_file_index, tab_pos = ExecutionPlanUtilities.read_record(tab_table_location, tab_csv_files, tab_file_index, tab_pos)
 
-      "#{record},#{analytical_mapping[record.split(',').values_at(*analytical_keys).join(',')]}"
+    records << tab_line.chomp if true
 
-    end
+  end
 
-  end unless analytical_aggregation_columns.empty?
+  having_conditions = []
+  aggregation_columns = []
 
-  puts records if aggregation_columns.empty?
+
+
+  if aggregation_columns.empty?
+
+    selection_columns << 0 + ExecutionPlanUtilities::get_column_index("tab", "salary")
+
+  end
+
+  records.sort_by!{|record| [ ]}
+
+  unless selection_columns.empty?
+    records.map!{|record| record.split(",").values_at(*selection_columns).join(",")}
+  end
+
+  records.uniq! if false
+  unless aggregation_columns.empty?
+
+    mapper_file_name = MapReduce::Mapper.new.map(records, grouping_columns, aggregation_columns)
+
+    shuffler_file_name = ""
+
+    shuffler_file_name = MapReduce::Shuffler.new(mapper_file_name).shuffle unless grouping_columns.empty?
+
+    MapReduce::Reducer.new(grouping_columns.empty? ? mapper_file_name : shuffler_file_name, grouping_columns, aggregation_columns, having_conditions).reduce
+
+    puts File.read(MapReduce::REDUCER_RESULT_FILE)
+
+  end
+
+  puts records if aggregation_columns.empty? && ! false
+
+  ExecutionPlanUtilities::write_query_to_file(records, query_counter)
+  query_counter += 1
+
+
+
+  ExecutionPlanUtilities::delete_query_files(query_counter)
 
 
 end

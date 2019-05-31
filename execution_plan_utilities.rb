@@ -1,5 +1,10 @@
 module ExecutionPlanUtilities
 
+  EXECUTION_PLAN_FILE_NAME = "execution_plan.txt"
+
+  FILES_PARENT = "C:\\Users\\Asus\\Documents\\Github\\pl-sql-compiler\\ruby\\"
+
+  @counter = 1
 
   def self.get_table_location(table_name)
 
@@ -67,6 +72,99 @@ module ExecutionPlanUtilities
     File.open(table_alias + "/" + table_alias + ".csv", "w") do |file|
       file.puts records
     end
+
+  end
+
+  def self.process_analytic_function(records, analytical_keys, analytical_aggregation_column)
+
+    analytical_aggregation_columns = [analytical_aggregation_column]
+
+    mapper_file_name = MapReduce::Mapper.new.map(records, analytical_keys, analytical_aggregation_columns)
+
+    shuffler_file_name = ""
+
+    shuffler_file_name = MapReduce::Shuffler.new(mapper_file_name).shuffle unless analytical_keys.empty?
+
+    analytical_mapping = MapReduce::Reducer.new(analytical_keys.empty? ? mapper_file_name : shuffler_file_name, analytical_keys, analytical_aggregation_columns, "").reduce
+
+    record_length = 0
+
+    records = records.map do |record|
+
+      record_length = record.split(",").length
+
+      if analytical_keys.empty?
+
+        "#{record},#{File.read(MapReduce::REDUCER_RESULT_FILE)}"
+
+      else
+
+        "#{record},#{analytical_mapping[record.split(',').values_at(*analytical_keys).join(',')]}"
+
+      end
+
+    end
+
+    [records, record_length]
+
+  end
+
+  def self.init_execution_plan_file
+
+    File.delete(EXECUTION_PLAN_FILE_NAME) if File.exist?(EXECUTION_PLAN_FILE_NAME)
+
+  end
+
+  def self.write_to_execution_plan(log)
+
+    file = File.open(EXECUTION_PLAN_FILE_NAME, "a")
+
+    file.puts (@counter += 1).to_s + " - " + log
+
+    file.close
+
+  end
+
+  def self.write_query_to_file(records, query_counter)
+
+    FileUtils.mkdir_p(FILES_PARENT + query_counter.to_s + "_query")
+
+    file = File.open(FILES_PARENT + query_counter.to_s + "_query/query.csv", "w")
+
+    file.puts records
+
+    file.close
+
+  end
+
+  def self.delete_query_files(query_counter)
+
+    query_counter.downto(0).each do |current_counter|
+
+      FileUtils.rm_rf(FILES_PARENT + current_counter.to_s + "_query")
+
+    end
+
+  end
+
+  def self.add_temp_data_type(name, members, query_counter)
+
+    temp_data_type = {}
+
+    temp_data_type["is_temp"] = true
+    temp_data_type["members"] = members
+    temp_data_type["name"] = name
+    temp_data_type["location"] = FILES_PARENT + query_counter.to_s
+
+    data_types = JSON.parse(File.read(MapReduce::DATA_TYPES_FILE_PATH))
+
+    data_types << temp_data_type
+
+    data_types_file = File.open(MapReduce::DATA_TYPES_FILE_PATH, "w")
+
+    data_types_file.puts data_types.to_json
+
+    data_types_file.close
 
   end
 
