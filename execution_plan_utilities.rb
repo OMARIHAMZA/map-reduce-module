@@ -1,26 +1,33 @@
 module ExecutionPlanUtilities
 
-  EXECUTION_PLAN_FILE_NAME = "execution_plan.txt"
 
   FILES_PARENT = "C:\\Users\\Asus\\Documents\\Github\\pl-sql-compiler\\ruby\\"
 
-  @counter = 1
+  EXECUTION_PLAN_FILE_NAME = FILES_PARENT + "\\execution_plan.txt"
+
+  @counter = 0
 
   def self.get_table_location(table_name)
 
     @json_array = JSON.parse File.read(MapReduce::DATA_TYPES_FILE_PATH)
     @json_array.map do |entry|
-      return entry["location"] if entry["name"].casecmp?(table_name)
+      return entry["location"], entry["field_terminator"] if entry["name"].casecmp?(table_name)
     end
   end
 
-  def self.get_csv_files(table_location)
-    Dir.entries(table_location).select {|f| (!File.directory? f) && (File.extname(f).casecmp?(".csv"))}
+  def self.get_csv_files(table_location, table_name = "")
+
+    csv_files = Dir.entries(table_location).select {|f| (!File.directory? f) && (File.extname(f).casecmp?(".csv"))}
+
+    ExecutionPlanUtilities::write_to_execution_plan("Fetch rows from table " + table_name) if csv_files.size > 0 && !table_name.empty?
+
+    csv_files
+
   end
 
-  def self.read_record(location, files, file_index, pos)
+  def self.read_record(location, files, file_index, pos, field_terminator)
 
-    line = nil
+    line = ""
 
     File.open(location + "/" + files[file_index]) do |f|
 
@@ -37,7 +44,7 @@ module ExecutionPlanUtilities
 
     end
 
-    return line, file_index, pos
+    return line.gsub(/#{field_terminator}/, ","), file_index, pos
 
   end
 
@@ -67,9 +74,9 @@ module ExecutionPlanUtilities
 
   def self.process_subselect_statement(records, table_alias, members)
 
-    FileUtils.mkdir_p("C:\\Users\\ASUS\\Documents\\GitHub\\map-reduce-module\\" + table_alias)
+    FileUtils.mkdir_p("C:\\Users\\ASUS\\Documents\\GitHub\\pl-sql-compiler\\ruby\\" + table_alias)
     # Write the result to a temp csv file
-    File.open(table_alias + "/" + table_alias + ".csv", "w") do |file|
+    File.open("C:\\Users\\ASUS\\Documents\\GitHub\\pl-sql-compiler\\ruby\\" + table_alias + "/" + table_alias + ".csv", "w") do |file|
       file.puts records
     end
 
