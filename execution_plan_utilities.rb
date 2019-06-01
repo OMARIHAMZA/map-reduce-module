@@ -98,7 +98,7 @@ module ExecutionPlanUtilities
 
     records = records.map do |record|
 
-      record_length = record.split(",").length
+      record_length = (record.split(",").length > record_length) ? record.split(",").length : record_length
 
       if analytical_keys.empty?
 
